@@ -1,53 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-<!--{% for post in posts %}-->
-<!--<h1>{{ post.title }}</h1>-->
-<!--<p>BY {{ post.author }} ON {{ post.date_posted }}</p>-->
-<!--<p>{{ post.content }}</p>-->
-<!--{% endfor %}-->
-<ul>
-    {% for post in posts %}
-    <li class="card" style="--color:#ececec; --bg-color:#E98B43">
-        <div class="icon"><i class="fa-solid fa-star"></i></div>
-        <div class="title"><a href="{{ post.url }}">{{ post.title }}</a></div>
-        <div class="content">
-            {{ post.content }}
+<ul class="list-group">
+    {% for job in jobs %}
+    <li class="list-group-item">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="mb-0">{{ job.title }}</h4>
+                <p class="mb-1"><strong>Author:</strong> {{ job.author }}</p>
+                <p class="mb-1"><strong>Upload Date:</strong> {{ job.date_posted }}</p>
+            </div>
         </div>
-        <div class="date-bottom-rigth">
-            {{ post.date_posted }}
-        </div>
-    </li>
-    <li class="card" style="--color:#ececec; --bg-color:#C23D2A">
-        <div class="icon"><i class="fa-solid fa-gear"></i></div>
-        <div class="title"><a href="{{ post.url }}">{{ post.title }}</a></div>
-        <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis pretium euismod.
-            Aenean elit sapien, varius quis ante sit amet, tincidunt finibus orci. Ut consectetur imperdiet quam, at
-            ultrices mi rutrum ut. Sed semper justo quis nisl ornare interdum in ut ante.
-        </div>
-    </li>
-    <li class="card" style="--color:#ececec; --bg-color:#842C2A">
-        <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
-        <div class="title"><a href="{{ post.url }}">{{ post.title }}</a></div>
-        <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis pretium euismod.
-            Aenean elit sapien, varius quis ante sit amet, tincidunt finibus orci. Ut consectetur imperdiet quam, at
-            ultrices mi rutrum ut. Sed semper justo quis nisl ornare interdum in ut ante.
-        </div>
-    </li>
-    <li class="card" style="--color:#ececec; --bg-color:#022F46">
-        <div class="icon"><i class="fa-solid fa-chart-column"></i></i></div>
-        <div class="title"><a href="{{ post.url }}">{{ post.title }}</a></div>
-        <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis pretium euismod.
-            Aenean elit sapien, varius quis ante sit amet, tincidunt finibus orci. Ut consectetur imperdiet quam, at
-            ultrices mi rutrum ut. Sed semper justo quis nisl ornare interdum in ut ante.
-        </div>
-    </li>
-    <li class="card" style="--color:#ececec; --bg-color:#032437">
-        <div class="icon"><i class="fa-solid fa-circle-star"></i></div>
-        <div class="title"><a href="{{ post.url }}">{{ post.title }}</a></div>
-        <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis pretium euismod.
-            Aenean elit sapien, varius quis ante sit amet, tincidunt finibus orci. Ut consectetur imperdiet quam, at
-            ultrices mi rutrum ut. Sed semper justo quis nisl ornare interdum in ut ante.
-        </div>
+        <p class="mb-0">{{ job.content }}</p>
     </li>
     {% endfor %}
 </ul>
