@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<br>
 <ul class="list-group">
     {% for job in jobs %}
     <li class="list-group-item">
@@ -12,6 +13,7 @@
         </div>
         <p class="mb-0">{{ job.content }}</p>
     </li>
+    <br>
     {% endfor %}
 </ul>
 {% endblock %}
