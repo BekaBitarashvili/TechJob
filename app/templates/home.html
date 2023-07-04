@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-9">
+        <ul class="list-group">
+            {% for job in jobs %}
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="mb-0">{{ job.title }}</h4>
+                        <p class="mb-1"><strong>Author:</strong> {{ job.author }}</p>
+                        <p class="mb-1"><strong>Upload Date:</strong> {{ job.date_posted }}</p>
+                    </div>
+                </div>
+                <p class="mb-0">{{ job.content }}</p>
+            </li>
+            <br>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <div class="card mb-3">
+            <div class="card-header">
+                Latest Added Jobs
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for job in latest_jobs %}
+                <li class="list-group-item">
+                    <a href="#">{{ job.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="card mb-3">
+            <div class="card-header">
+                Announcements
+            </div>
+            <div class="card-body">
+                <p>Announcement 1</p>
+                <p>Announcement 2</p>
+                <p>Announcement 3</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Calendar
+            </div>
+            <div class="card-body">
+                <p>Calendar</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
