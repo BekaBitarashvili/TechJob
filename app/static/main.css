@@ -43,3 +43,8 @@ body {
     color: inherit;
     text-decoration: none;
 }
+/* For default pic */
+.account-img {
+  max-width: 100px;
+  max-height: 100px;
+}
