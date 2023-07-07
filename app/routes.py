@@ -34,6 +34,54 @@ jobs = [
         'title': 'Swift Developer',
         'content': 'Swift is awesome, and SwiftUI is even more awesome!, Fifth post content,',
         'date_posted': 'April 24, 2020'
+    },
+    {
+        'author': 'Oracle',
+        'title': 'JavaScript Developer',
+        'content': 'JavaScript is awesome, and React is even more awesome!, Sixth post content,',
+        'date_posted': 'April 25, 2020'
+    },
+    {
+        'author': 'IBM',
+        'title': 'PHP Developer',
+        'content': 'PHP is awesome, and Laravel is even more awesome!, Seventh post content,',
+        'date_posted': 'April 26, 2020'
+    },
+    {
+        'author': 'Intel',
+        'title': 'Ruby Developer',
+        'content': 'Ruby is awesome, and Rails is even more awesome!, Eighth post content,',
+        'date_posted': 'April 27, 2020'
+    },
+    {
+        'author': 'Twitter',
+        'title': 'Go Developer',
+        'content': 'Go is awesome, and Gin is even more awesome!, Ninth post content,',
+        'date_posted': 'April 28, 2020'
+    },
+    {
+        'author': 'Uber',
+        'title': 'Rust Developer',
+        'content': 'Rust is awesome, and Rocket is even more awesome!, Tenth post content,',
+        'date_posted': 'April 29, 2020'
+    },
+    {
+        'author': 'Netflix',
+        'title': 'Kotlin Developer',
+        'content': 'Kotlin is awesome, and Ktor is even more awesome!, Eleventh post content,',
+        'date_posted': 'April 30, 2020'
+    },
+    {
+        'author': 'Airbnb',
+        'title': 'Dart Developer',
+        'content': 'Dart is awesome, and Flutter is even more awesome!, Twelfth post content,',
+        'date_posted': 'May 1, 2020'
+    },
+    {
+        'author': 'Paypal',
+        'title': 'TypeScript Developer',
+        'content': 'TypeScript is awesome, and Angular is even more awesome!, Thirteenth post content,',
+        'date_posted': 'May 2, 2020'
     }
 ]
 
