@@ -26,7 +26,7 @@
             <div class="col-md-6 offset-md-3">
                 <div class="registration-form rectangle-border">
                     <h2 class="white-text">Account Info</h2>
-                    <form method="POST" action="">
+                    <form method="POST" action="" enctype="multipart/form-data">
                         {{ form.hidden_tag() }}
                         <div class="form-group">
                             <label class="white-text">{{ form.username.label }}</label><br>
@@ -53,6 +53,15 @@
                             </div>
                             {% else %}
                             {{ form.email(class="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label class="white-text">{{ form.picture.label }}</label><br>
+                            {{ form.picture(class="form-control-file") }}
+                            {% if form.picture.errors %}
+                                {% for error in form.email.errors %}
+                                <span class="text-danger">{{ error }}</span><br>
+                                {% endfor %}
                             {% endif %}
                         </div>
                         <div class="form-group">

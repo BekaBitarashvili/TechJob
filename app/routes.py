@@ -1,94 +1,16 @@
+import os
+import secrets
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db, bcrypt
-from app.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from app.forms import RegistrationForm, LoginForm, UpdateAccountForm, JobForm
 from app.models import User, Job
 from flask_login import login_user, current_user, logout_user, login_required
-
-jobs = [
-    {
-        'author': 'Google',
-        'title': 'Python Developer',
-        'content': 'Python is awesome, and Flask is even more awesome!, First post content,',
-        'date_posted': 'April 20, 2020'
-    },
-    {
-        'author': 'Facebook',
-        'title': 'Java Developer',
-        'content': 'Java is awesome, and Spring is even more awesome!, Second post content,',
-        'date_posted': 'April 21, 2020'
-    },
-    {
-        'author': 'Amazon',
-        'title': 'C++ Developer',
-        'content': 'C++ is awesome, and Django is even more awesome!, Third post content,',
-        'date_posted': 'April 22, 2020'
-    },
-    {
-        'author': 'Microsoft',
-        'title': 'C# Developer',
-        'content': 'C# is awesome, and ASP.NET is even more awesome!, Fourth post content,',
-        'date_posted': 'April 23, 2020'
-    },
-    {
-        'author': 'Apple',
-        'title': 'Swift Developer',
-        'content': 'Swift is awesome, and SwiftUI is even more awesome!, Fifth post content,',
-        'date_posted': 'April 24, 2020'
-    },
-    {
-        'author': 'Oracle',
-        'title': 'JavaScript Developer',
-        'content': 'JavaScript is awesome, and React is even more awesome!, Sixth post content,',
-        'date_posted': 'April 25, 2020'
-    },
-    {
-        'author': 'IBM',
-        'title': 'PHP Developer',
-        'content': 'PHP is awesome, and Laravel is even more awesome!, Seventh post content,',
-        'date_posted': 'April 26, 2020'
-    },
-    {
-        'author': 'Intel',
-        'title': 'Ruby Developer',
-        'content': 'Ruby is awesome, and Rails is even more awesome!, Eighth post content,',
-        'date_posted': 'April 27, 2020'
-    },
-    {
-        'author': 'Twitter',
-        'title': 'Go Developer',
-        'content': 'Go is awesome, and Gin is even more awesome!, Ninth post content,',
-        'date_posted': 'April 28, 2020'
-    },
-    {
-        'author': 'Uber',
-        'title': 'Rust Developer',
-        'content': 'Rust is awesome, and Rocket is even more awesome!, Tenth post content,',
-        'date_posted': 'April 29, 2020'
-    },
-    {
-        'author': 'Netflix',
-        'title': 'Kotlin Developer',
-        'content': 'Kotlin is awesome, and Ktor is even more awesome!, Eleventh post content,',
-        'date_posted': 'April 30, 2020'
-    },
-    {
-        'author': 'Airbnb',
-        'title': 'Dart Developer',
-        'content': 'Dart is awesome, and Flutter is even more awesome!, Twelfth post content,',
-        'date_posted': 'May 1, 2020'
-    },
-    {
-        'author': 'Paypal',
-        'title': 'TypeScript Developer',
-        'content': 'TypeScript is awesome, and Angular is even more awesome!, Thirteenth post content,',
-        'date_posted': 'May 2, 2020'
-    }
-]
 
 
 @app.route('/')
 @app.route('/home')
 def home():
+    jobs = Job.query.all()
     return render_template('home.html', jobs=jobs)
 
 
@@ -134,9 +56,50 @@ def logout():
     return redirect(url_for('home'))
 
 
-@app.route('/account')
+def save_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/images', picture_fn)
+    form_picture.save(picture_path)
+    # return picture_fn
+    # picture_fn = random_hex + f_ext
+    # picture_path = os.path.join(app.root_path, 'static/images', picture_fn)
+    # i = Image.open(form_picture)
+    # i.thumbnail((125, 125))
+    # i.save(picture_path)
+    return picture_fn
+
+
+@app.route('/account', methods=['POST', 'GET'])
 @login_required
 def account():
     form = UpdateAccountForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data)
+            current_user.image_file = picture_file
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        # db.session.add(user)
+        db.session.commit()
+        flash('Your Account has been updated!', 'success')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
     image_file = url_for('static', filename='images/' + current_user.image_file)
     return render_template('account.html', title='Account', image_file=image_file, form=form)
+
+
+@app.route('/job/new', methods=['POST', 'GET'])
+@login_required
+def new_job():
+    form = JobForm()
+    if form.validate_on_submit():
+        job = Job(title=form.title.data, description=form.description.data, author=current_user)
+        db.session.add(job)
+        db.session.commit()
+        flash('Your Job has been created!', 'success')
+        return redirect(url_for('home'))
+    return render_template('create_job.html', title='New Job', legend='New Job', form=form)
