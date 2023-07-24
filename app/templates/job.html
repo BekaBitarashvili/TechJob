@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="rectangle-border">
+                <h2 class="white-text">{{ job.title }}</h2>
+                <p class="white-text mb-1"><strong>Author:</strong> {{ job.author.username }}</p>
+                <p class="white-text mb-1"><strong>Upload Date:</strong> {{ job.date_posted.strftime('%Y-%m-%d') }}</p>
+                <p class="white-text mb-0"><strong>Description:</strong> {{ job.description }}</p>
+                <br>
+                {% if current_user == job.author %}
+                <a class="btn btn-primary" href="{{ url_for('updatejob', job_id=job.id) }}">შეცვლა</a>
+                <a class="btn btn-danger" href="{{ url_for('deletejob', job_id=job.id) }}">წაშლა</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

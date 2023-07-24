@@ -1,6 +1,6 @@
 import os
 import secrets
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, abort
 from app import app, db, bcrypt
 from app.forms import RegistrationForm, LoginForm, UpdateAccountForm, JobForm
 from app.models import User, Job
@@ -103,3 +103,40 @@ def new_job():
         flash('Your Job has been created!', 'success')
         return redirect(url_for('home'))
     return render_template('create_job.html', title='New Job', legend='New Job', form=form)
+
+
+@app.route('/job/<int:job_id>')
+def job(job_id):
+    job = Job.query.get_or_404(job_id)
+    return render_template('job.html', title=job.title, job=job)
+
+
+@app.route('/job/<int:job_id>/update', methods=['POST', 'GET'])
+@login_required
+def updatejob(job_id):
+    job = Job.query.get_or_404(job_id)
+    if job.author != current_user:
+        abort(403)
+    form = JobForm()
+    if form.validate_on_submit():
+        job.title = form.title.data
+        job.description = form.description.data
+        db.session.commit()
+        flash('Your Job has been updated!', 'success')
+        return redirect(url_for('job', job_id=job.id))
+    elif request.method == 'GET':
+        form.title.data = job.title
+        form.description.data = job.description
+    return render_template('create_job.html', title='Update Job', legend='Update Job', form=form)
+
+
+@app.route('/job/<int:job_id>/delete', methods=['POST', 'GET'])
+@login_required
+def deletejob(job_id):
+    job = Job.query.get_or_404(job_id)
+    if job.author != current_user:
+        abort(403)
+    db.session.delete(job)
+    db.session.commit()
+    flash('Your Job has been deleted!', 'success')
+    return redirect(url_for('home'))

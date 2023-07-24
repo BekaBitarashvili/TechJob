@@ -17,11 +17,12 @@
                     </div>
                 </div>
                 <div id="job-{{ loop.index }}" class="collapse">
-                    <img class="rounded-circle account-img smaller-image" src="{{ url_for('static', filename='images/' + job.author.image_file) }}" style="max-width: 50px; max-height: 50px;">
+                    <img class="rounded-circle account-img smaller-image" src="{{ url_for('static', filename='images/' + job.author.image_file) }}">
                     <br>
-                    <p class="mb-1"><strong>Author:</strong> {{ job.author.username }}</p>
-                    <p class="mb-1"><strong>Upload Date:</strong> {{ job.date_posted.strftime('%Y-%m-%d') }}</p>
-                    <p class="mb-0"><strong>Description:</strong> {{ job.description }}</p>
+                    <a class="btn  more-button" href="{{ url_for('job', job_id=job.id) }}">ვრცლად</a>
+                    <p class="mb-1"><strong>ავტორი:</strong> {{ job.author.username }}</p>
+                    <p class="mb-1"><strong>თარიღი:</strong> {{ job.date_posted.strftime('%Y-%m-%d') }}</p>
+                    <p class="mb-0"><strong>აღწერა:</strong> {{ job.description }}</p>
                 </div>
             </li>
             <br>
@@ -31,7 +32,7 @@
     <div class="col-md-3">
         <div class="card mb-3">
             <div class="card-header">
-                Latest Added Jobs
+                <div id="live-clock"></div>
             </div>
             <ul class="list-group list-group-flush">
                 {% for job in latest_jobs %}
@@ -53,10 +54,10 @@
         </div>
         <div class="card">
             <div class="card-header">
-                Calendar
+                კალენდარი
             </div>
             <div class="card-body">
-                <p>Calendar</p>
+                <p>კალენდარი</p>
             </div>
         </div>
     </div>

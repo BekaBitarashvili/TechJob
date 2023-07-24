@@ -20,27 +20,27 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{url_for ('home') }}">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{{url_for ('home') }}">მთავარი</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for ('about') }}">About</a>
+                        <a class="nav-link" href="{{url_for ('about') }}">ჩვენს შესახებ</a>
                     </li>
                     {% if current_user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for ('new_job') }}">New Job</a>
+                        <a class="nav-link" href="{{url_for ('new_job') }}">ახალი ვაკანსია</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for ('account') }}">Account</a>
+                        <a class="nav-link" href="{{url_for ('account') }}">პროფილი</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for ('logout') }}">Logout</a>
+                        <a class="nav-link" href="{{url_for ('logout') }}">გამოსვლა</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for ('login') }}">Login</a>
+                        <a class="nav-link" href="{{url_for ('login') }}">შესვლა</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for ('register') }}">Register</a>
+                        <a class="nav-link" href="{{url_for ('register') }}">რეგისტრაცია</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -84,6 +84,24 @@
             navCollapse.collapse('hide');
         });
     });
+</script>
+<script>
+
+    function updateClock() {
+        const clockElement = document.getElementById('live-clock');
+        const currentTime = new Date();
+        const hours = currentTime.getHours().toString().padStart(2, '0');
+        const minutes = currentTime.getMinutes().toString().padStart(2, '0');
+        const seconds = currentTime.getSeconds().toString().padStart(2, '0');
+        const timeString = `${hours}:${minutes}:${seconds}`;
+        clockElement.textContent = timeString;
+    }
+
+
+    updateClock();
+
+
+    setInterval(updateClock, 1000);
 </script>
 </body>
 </html>

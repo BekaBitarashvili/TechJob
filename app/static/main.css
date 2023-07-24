@@ -57,3 +57,12 @@ body {
     top: 10px;
     right: 10px;
 }
+.more-button {
+        background-color: #510093;
+        color: white;
+        position: absolute;
+        top: 15px;
+        right: 70px;
+        padding: 8px 16px;
+        border-radius: 5px;
+    }
