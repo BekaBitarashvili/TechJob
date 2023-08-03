@@ -7,7 +7,7 @@
         <div class="col-md-6 offset-md-3">
             <div class="rectangle-border">
                 <h2 class="white-text">{{ job.title }}</h2>
-                <p class="white-text mb-1"><strong>Author:</strong> {{ job.author.username }}</p>
+                <a class="mb-1" href="{{ url_for('user_jobs', username=job.author.username) }}"><strong>ავტორი:</strong> {{ job.author.username }}</a>
                 <p class="white-text mb-1"><strong>Upload Date:</strong> {{ job.date_posted.strftime('%Y-%m-%d') }}</p>
                 <p class="white-text mb-0"><strong>Description:</strong> {{ job.description }}</p>
                 <br>

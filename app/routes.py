@@ -10,7 +10,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route('/')
 @app.route('/home')
 def home():
-    jobs = Job.query.all()
+    page = request.args.get('page', 1, type=int)
+    jobs = Job.query.order_by(Job.date_posted.desc()).paginate(page=page, per_page=10)
     return render_template('home.html', jobs=jobs)
 
 
@@ -140,3 +141,11 @@ def deletejob(job_id):
     db.session.commit()
     flash('Your Job has been deleted!', 'success')
     return redirect(url_for('home'))
+
+
+@app.route('/user/<string:username>')
+def user_jobs(username):
+    page = request.args.get('page', 1, type=int)
+    user = User.query.filter_by(username=username).first_or_404()
+    jobs = Job.query.filter_by(author=user).order_by(Job.date_posted.desc()).paginate(page=page, per_page=10)
+    return render_template('user_jobs.html', jobs=jobs, user=user)
