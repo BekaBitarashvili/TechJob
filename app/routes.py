@@ -5,7 +5,7 @@ import uuid
 
 from flask import render_template, url_for, flash, redirect, request, abort
 from app import app, db, bcrypt, mail
-from app.forms import RegistrationForm, LoginForm, UpdateAccountForm, JobForm
+from app.forms import RegistrationForm, LoginForm, UpdateAccountForm, JobForm, ResetRequestForm, ResetPasswordForm
 from app.models import User, Job
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
@@ -153,3 +153,40 @@ def user_jobs(username):
     user = User.query.filter_by(username=username).first_or_404()
     jobs = Job.query.filter_by(author=user).order_by(Job.date_posted.desc()).paginate(page=page, per_page=10)
     return render_template('user_jobs.html', jobs=jobs, user=user)
+
+
+def send_mail(user):
+    token = user.get_reset_token()
+    msg = Message('Password Reset Request', recipients=[user.email], sender='noreply@demo.com')
+    msg.body = f'''To reset your password, visit the following link:
+    
+{url_for('reset_token', token=token, _external=True)}
+    '''
+
+
+@app.route('/reset_password', methods=['POST', 'GET'])
+def reset_request():
+    form = ResetRequestForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_mail(user)
+        flash('An email has been sent with instructions to reset your password', 'info')
+        return redirect(url_for('login'))
+    return render_template('reset_request.html', title='Reset Password', form=form)
+
+
+@app.route('/reset_password/<token>', methods=['POST', 'GET'])
+def reset_token(token):
+    user = User.verify_reset_token(token)
+    if user is None:
+        flash('That is an invalid or expired token', 'danger')
+        return redirect(url_for('reset_request'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user.password = hashed_password
+        db.session.add(user)
+        flash('Your password has been updated! You are now able to log in', 'success')
+        return redirect(url_for('login'))
+    return render_template('reset_token.html', title='Reset Password', form=form)

@@ -54,3 +54,14 @@ class JobForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
     submit = SubmitField("Add Job")
+
+
+class ResetRequestForm(FlaskForm):
+    email = StringField(label='Email', validators=[DataRequired()])
+    submit = SubmitField(label='Request Password Reset', validators=[DataRequired()])
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField(label='Password', validators=[DataRequired()])
+    confirm_password = PasswordField(label='Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField(label="Change Password")
