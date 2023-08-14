@@ -12,7 +12,7 @@
 <header class="main-header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{url_for ('home') }}">TechJobs</a>
+            <a class="navbar-brand" href="{{url_for ('main.home') }}">TechJobs</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -20,27 +20,27 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{url_for ('home') }}">მთავარი</a>
+                        <a class="nav-link active" aria-current="page" href="{{url_for ('main.home') }}">მთავარი</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for ('about') }}">ჩვენს შესახებ</a>
+                        <a class="nav-link" href="{{url_for ('main.about') }}">ჩვენს შესახებ</a>
                     </li>
                     {% if current_user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for ('new_job') }}">ახალი ვაკანსია</a>
+                        <a class="nav-link" href="{{url_for ('jobs.new_job') }}">ახალი ვაკანსია</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for ('account') }}">პროფილი</a>
+                        <a class="nav-link" href="{{url_for ('users.account') }}">პროფილი</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for ('logout') }}">გამოსვლა</a>
+                        <a class="nav-link" href="{{url_for ('users.logout') }}">გამოსვლა</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for ('login') }}">შესვლა</a>
+                        <a class="nav-link" href="{{url_for ('users.login') }}">შესვლა</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for ('register') }}">რეგისტრაცია</a>
+                        <a class="nav-link" href="{{url_for ('users.register') }}">რეგისტრაცია</a>
                     </li>
                     {% endif %}
                 </ul>
