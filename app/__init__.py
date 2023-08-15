@@ -5,7 +5,6 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from app.config import Config
 
-
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
@@ -26,8 +25,10 @@ def create_app(config_class=Config):
     from app.users.routes import users
     from app.main.routes import main
     from app.jobs.routes import jobs
+    from app.errors.hendlers import errors
     app.register_blueprint(users)
     app.register_blueprint(main)
     app.register_blueprint(jobs)
+    app.register_blueprint(errors)
 
     return app
