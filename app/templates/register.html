@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="registration-form rectangle-border">
-                <h2 class="white-text">Register</h2>
+                <h2 class="white-text">რეგისტრაცია</h2>
                 <form method="POST" action="">
                     {{ form.hidden_tag() }}
                     <div class="form-group">
@@ -67,9 +67,9 @@
                     </div>
                 </form>
             </div>
-            <div class="login-link">
-                <p class="text-center white-text">Already have an account? <a href="{{ url_for('users.login') }}">Sign In</a></p>
-            </div>
+            <small class="login-link">
+                <p class="text-center white-text">გაქვთ ექაუნთი? <a href="{{ url_for('users.login') }}">გაიარეთ ავტორიზაცია</a></p>
+            </small>
         </div>
     </div>
 </div>

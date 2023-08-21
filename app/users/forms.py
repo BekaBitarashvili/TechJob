@@ -7,54 +7,55 @@ from app.models import User
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField("Sign Up")
+    username = StringField('სახელი', validators=[DataRequired(), Length(min=2, max=20)])
+    email = StringField('ემილი', validators=[DataRequired(), Email()])
+    password = PasswordField('პაროლი', validators=[DataRequired()])
+    confirm_password = PasswordField('გაიმეორეთ პაროლი', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField("რეგისტრაცია")
 
     def validete_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user:
-            raise ValidationError('That username is taken. Please choose another one.')
+            raise ValidationError('ასეთი სახელი დაკავებულია. გთხოვთ აირჩიეთ სხვა.')
 
     def validete_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
-            raise ValidationError('That email is taken. Please choose another one.')
+            raise ValidationError('ასეთი იმეილი დაკავებულია. გთხოვთ აირჩიეთ სხვა.')
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember = BooleanField('Remember Me')
-    submit = SubmitField("Login")
+    email = StringField('იმეილი', validators=[DataRequired(), Email()])
+    password = PasswordField('პაროლი', validators=[DataRequired()])
+    remember = BooleanField('დაიმახსოვრე')
+    submit = SubmitField("ავტორიზაცია")
 
 
 class UpdateAccountForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    picture = FileField("Update Profile Picture", validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
-    submit = SubmitField("Update")
+    username = StringField('სახელი', validators=[DataRequired(), Length(min=2, max=20)])
+    email = StringField('იმეილი', validators=[DataRequired(), Email()])
+    picture = FileField("განაახლეთ სურათი", validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
+    submit = SubmitField("განახლება")
 
     def validete_username(self, username):
         if username.data != current_user.username:
             user = User.query.filter_by(username=username.data).first()
             if user:
-                raise ValidationError('That username is taken. Please choose another one.')
+                raise ValidationError('ასეთი სახელი დაკავებულია. გთხოვთ აირჩიეთ სხვა.')
 
     def validete_email(self, email):
         if email.data != current_user.email:
             user = User.query.filter_by(email=email.data).first()
             if user:
-                raise ValidationError('That email is taken. Please choose another one.')
+                raise ValidationError('ასეთი იმეილი დაკავებულია. გთხოვთ აირჩიეთ სხვა.')
+
 
 class ResetRequestForm(FlaskForm):
-    email = StringField(label='Email', validators=[DataRequired()])
-    submit = SubmitField(label='Request Password Reset', validators=[DataRequired()])
+    email = StringField(label='იმეილი', validators=[DataRequired()])
+    submit = SubmitField(label='პაროლის აღდგენა', validators=[DataRequired()])
 
 
 class ResetPasswordForm(FlaskForm):
-    password = PasswordField(label='Password', validators=[DataRequired()])
-    confirm_password = PasswordField(label='Confirm Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField(label="Change Password")
+    password = PasswordField(label='პაროლი', validators=[DataRequired()])
+    confirm_password = PasswordField(label='დაადასტურეთ პაროლი', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField(label="პაროლის შეცვლა")

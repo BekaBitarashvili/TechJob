@@ -15,7 +15,7 @@ def new_job():
         job = Job(title=form.title.data, description=form.description.data, author=current_user)
         db.session.add(job)
         db.session.commit()
-        flash('Your Job has been created!', 'success')
+        flash('ვაკანსია წარმატებით შეიქმნა!', 'success')
         return redirect(url_for('main.home'))
     return render_template('create_job.html', title='New Job', legend='New Job', form=form)
 
@@ -37,7 +37,7 @@ def updatejob(job_id):
         job.title = form.title.data
         job.description = form.description.data
         db.session.commit()
-        flash('Your Job has been updated!', 'success')
+        flash('ვაკანსია წარმატებით განახლდა!', 'success')
         return redirect(url_for('jobs.job', job_id=job.id))
     elif request.method == 'GET':
         form.title.data = job.title
@@ -53,5 +53,5 @@ def deletejob(job_id):
         abort(403)
     db.session.delete(job)
     db.session.commit()
-    flash('Your Job has been deleted!', 'success')
+    flash('ვაკანსია წარმატებით წაიშალა!', 'success')
     return redirect(url_for('main.home'))

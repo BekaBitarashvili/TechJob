@@ -19,7 +19,7 @@ def register():
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
-        flash('Your Account has been created! Now Log in', 'success')
+        flash('მომხმარებელი შექმნილია, გაიარეთ ავტორიზაცია', 'success')
         return redirect(url_for('users.login'))
     return render_template('register.html', form=form)
 
@@ -36,7 +36,7 @@ def login():
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('main.home'))
         else:
-            flash(f'Login Unsuccessful. Please check username and password', 'danger')
+            flash(f'შეცდომა. გთხოვთ გადაამოწმეთ სახელი და პაროლი', 'danger')
     return render_template('login.html', title='Login', form=form)
 
 
@@ -58,7 +58,7 @@ def account():
         current_user.email = form.email.data
         # db.session.add(user)
         db.session.commit()
-        flash('Your Account has been updated!', 'success')
+        flash('თქვენი პროფილი განახლებულია!', 'success')
         return redirect(url_for('users.account'))
     elif request.method == 'GET':
         form.username.data = current_user.username
@@ -82,7 +82,7 @@ def reset_request():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             send_mail(user)
-        flash('An email has been sent with instructions to reset your password', 'info')
+        flash('მეილი გამოგზავნილია ინსტრუქციასთან ერთად, პაროლის აღსადგენად', 'info')
         return redirect(url_for('users.login'))
     return render_template('reset_request.html', title='Reset Password', form=form)
 
@@ -91,13 +91,13 @@ def reset_request():
 def reset_token(token):
     user = User.verify_reset_token(token)
     if user is None:
-        flash('That is an invalid or expired token', 'danger')
+        flash('არასწორი ან ვადაგასული ტოკენი!', 'danger')
         return redirect(url_for('users.reset_request'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user.password = hashed_password
         db.session.add(user)
-        flash('Your password has been updated! You are now able to log in', 'success')
+        flash('თქვენი პაროლი განახლებულია, შეგიძლიათ გაიაროთ ავტორიზაცია', 'success')
         return redirect(url_for('users.login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
