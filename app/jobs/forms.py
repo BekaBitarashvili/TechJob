@@ -4,6 +4,6 @@ from wtforms.validators import DataRequired
 
 
 class JobForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    description = TextAreaField('Description', validators=[DataRequired()])
-    submit = SubmitField("Add Job")
+    title = StringField('სათაური', validators=[DataRequired()])
+    description = TextAreaField('აღწერა', validators=[DataRequired()])
+    submit = SubmitField("დამატება")

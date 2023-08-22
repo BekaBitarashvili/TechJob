@@ -17,7 +17,7 @@ def new_job():
         db.session.commit()
         flash('ვაკანსია წარმატებით შეიქმნა!', 'success')
         return redirect(url_for('main.home'))
-    return render_template('create_job.html', title='New Job', legend='New Job', form=form)
+    return render_template('create_job.html', title='ახალი ვაკანსია', legend='ახალი ვაკანსია', form=form)
 
 
 @jobs.route('/job/<int:job_id>')
@@ -42,7 +42,7 @@ def updatejob(job_id):
     elif request.method == 'GET':
         form.title.data = job.title
         form.description.data = job.description
-    return render_template('create_job.html', title='Update Job', legend='Update Job', form=form)
+    return render_template('create_job.html', title='Update Job', legend='ვაკანსიის განახლება', form=form)
 
 
 @jobs.route('/job/<int:job_id>/delete', methods=['POST', 'GET'])
