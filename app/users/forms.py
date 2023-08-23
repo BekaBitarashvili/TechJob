@@ -8,7 +8,7 @@ from app.models import User
 
 class RegistrationForm(FlaskForm):
     username = StringField('სახელი', validators=[DataRequired(), Length(min=2, max=20)])
-    email = StringField('ემილი', validators=[DataRequired(), Email()])
+    email = StringField('იმეილი', validators=[DataRequired(), Email()])
     password = PasswordField('პაროლი', validators=[DataRequired()])
     confirm_password = PasswordField('გაიმეორეთ პაროლი', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField("რეგისტრაცია")
