@@ -21,7 +21,8 @@
                          src="{{ url_for('static', filename='images/' + job.author.image_file) }}">
                     <br>
                     <a class="btn  more-button" href="{{ url_for('jobs.job', job_id=job.id) }}">ვრცლად</a>
-                    <a class="mb-1" href="{{ url_for('users.user_jobs', username=job.author.username) }}"><strong>ავტორი:</strong> {{ job.author.username }}</a>
+                    <a class="mb-1" href="{{ url_for('users.user_jobs', username=job.author.username) }}"><strong>ავტორი:</strong>
+                        {{ job.author.username }}</a>
                     <p class="mb-1"><strong>თარიღი:</strong> {{ job.date_posted.strftime('%Y-%m-%d') }}</p>
                     <p class="mb-0"><strong>აღწერა:</strong> {{ job.description }}</p>
                 </div>
@@ -32,7 +33,8 @@
                 {% for page_num in jobs.iter_pages() %}
                 {% if page_num %}
                 {% if jobs.page == page_num %}
-                <a class="btn btn-info mb-2 custom-page-link" href="{{ url_for('main.home', page=page_num) }}">{{ page_num
+                <a class="btn btn-info mb-2 custom-page-link" href="{{ url_for('main.home', page=page_num) }}">{{
+                    page_num
                     }}</a>
                 {% else %}
                 <a class="btn btn-outline-info mb-2 custom-page-link" href="{{ url_for('main.home', page=page_num) }}">{{
@@ -73,7 +75,34 @@
                 კალენდარი
             </div>
             <div class="card-body">
-                <p>კალენდარი</p>
+                <div class="calendar-container">
+                    <header class="calendar-header">
+                        <p class="calendar-current-date"></p>
+                        <div class="calendar-navigation">
+                <span id="calendar-prev"
+                      class="material-symbols-rounded">
+                    chevron_left
+                </span>
+                            <span id="calendar-next"
+                                  class="material-symbols-rounded">
+                    chevron_right
+                </span>
+                        </div>
+                    </header>
+
+                    <div class="calendar-body">
+                        <ul class="calendar-weekdays">
+                            <li>კვ</li>
+                            <li>ორშ</li>
+                            <li>სამშ</li>
+                            <li>ოთხშ</li>
+                            <li>ხუთშ</li>
+                            <li>პარ</li>
+                            <li>შაბ</li>
+                        </ul>
+                        <ul class="calendar-dates"></ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

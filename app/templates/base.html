@@ -7,6 +7,9 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/job64.png')}}">
+    <link rel="stylesheet"
+          href=
+                  "https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
 </head>
 <body>
 <header class="main-header">
@@ -102,6 +105,98 @@
 
 
     setInterval(updateClock, 1000);
+</script>
+
+<script>
+    let date = new Date();
+let year = date.getFullYear();
+let month = date.getMonth();
+
+const day = document.querySelector(".calendar-dates");
+
+const currdate = document
+    .querySelector(".calendar-current-date");
+
+const prenexIcons = document
+    .querySelectorAll(".calendar-navigation span");
+
+const months = [
+    "იანვარი",
+    "თებერვალი",
+    "მარტი",
+    "აპრილი",
+    "მაისი",
+    "ივნისი",
+    "ივლისი",
+    "აგვისტო",
+    "სექტემბერი",
+    "ოქტომბერი",
+    "ნოემბერი",
+    "დეკემბერი"
+];
+
+const manipulate = () => {
+
+    let dayone = new Date(year, month, 1).getDay();
+
+    let lastdate = new Date(year, month + 1, 0).getDate();
+
+    let dayend = new Date(year, month, lastdate).getDay();
+
+    let monthlastdate = new Date(year, month, 0).getDate();
+
+    let lit = "";
+
+    for (let i = dayone; i > 0; i--) {
+        lit +=
+            `<li class="inactive">${monthlastdate - i + 1}</li>`;
+    }
+
+    for (let i = 1; i <= lastdate; i++) {
+
+        let isToday = i === date.getDate()
+            && month === new Date().getMonth()
+            && year === new Date().getFullYear()
+            ? "active"
+            : "";
+        lit += `<li class="${isToday}">${i}</li>`;
+    }
+
+    for (let i = dayend; i < 6; i++) {
+        lit += `<li class="inactive">${i - dayend + 1}</li>`
+    }
+
+    currdate.innerText = `${months[month]} ${year}`;
+
+
+    day.innerHTML = lit;
+}
+
+manipulate();
+
+prenexIcons.forEach(icon => {
+
+    icon.addEventListener("click", () => {
+
+        month = icon.id === "calendar-prev" ? month - 1 : month + 1;
+
+        if (month < 0 || month > 11) {
+
+            date = new Date(year, month, new Date().getDate());
+
+            year = date.getFullYear();
+
+            month = date.getMonth();
+        }
+
+        else {
+
+            date = new Date();
+        }
+
+        manipulate();
+    });
+});
 </script>
 </body>
 </html>
