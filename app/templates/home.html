@@ -72,39 +72,15 @@
         </div>
         <div class="card">
             <div class="card-header">
-                კალენდარი
+                სპონსორები
             </div>
             <div class="card-body">
-                <div class="calendar-container">
-                    <header class="calendar-header">
-                        <p class="calendar-current-date"></p>
-                        <div class="calendar-navigation">
-                <span id="calendar-prev"
-                      class="material-symbols-rounded">
-                    chevron_left
-                </span>
-                            <span id="calendar-next"
-                                  class="material-symbols-rounded">
-                    chevron_right
-                </span>
-                        </div>
-                    </header>
-
-                    <div class="calendar-body">
-                        <ul class="calendar-weekdays">
-                            <li>კვ</li>
-                            <li>ორშ</li>
-                            <li>სამშ</li>
-                            <li>ოთხშ</li>
-                            <li>ხუთშ</li>
-                            <li>პარ</li>
-                            <li>შაბ</li>
-                        </ul>
-                        <ul class="calendar-dates"></ul>
-                    </div>
-                </div>
+                <img class="img-fluid" src="{{ url_for('static', filename='images/coke.jpg') }}">
+                <img class="img-fluid" src="{{ url_for('static', filename='images/marketer.png') }}">
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 {% endblock %}
