@@ -60,10 +60,7 @@ body {
 .more-button {
         background-color: #510093;
         color: white;
-        position: absolute;
-        top: 15px;
-        right: 70px;
-        padding: 8px 16px;
+        padding: 6px 12px;
         border-radius: 5px;
     }
 .custom-page-link {
@@ -71,4 +68,8 @@ body {
 }
 .page-links {
     display: inline-block;
+}
+
+.more-title {
+    background-color: #510093;
 }
