@@ -41,6 +41,11 @@ class Job(db.Model):
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     description = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    salary = db.Column(db.String(50), nullable=True)
+    location = db.Column(db.String(100), nullable=True)
+    benefits = db.Column(db.Text, nullable=True)
+    data_verification = db.Column(db.Text, nullable=True)
+    required_skills = db.Column(db.Text, nullable=True)
 
     def __repr__(self):
         return f"Job('{self.title}', '{self.date_posted}')"

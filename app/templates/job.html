@@ -10,6 +10,22 @@
                 <a class="mb-1" href="{{ url_for('users.user_jobs', username=job.author.username) }}"><strong>ავტორი:</strong> {{ job.author.username }}</a>
                 <p class="white-text mb-1"><strong>თარიღი:</strong> {{ job.date_posted.strftime('%Y-%m-%d') }}</p>
                 <p class="white-text mb-0"><strong>აღწერა:</strong> {{ job.description }}</p>
+
+                {% if job.salary %}
+                <p class="white-text mb-0"><strong>Salary:</strong> {{ job.salary }}</p>
+                {% endif %}
+                {% if job.location %}
+                <p class="white-text mb-0"><strong>Location:</strong> {{ job.location }}</p>
+                {% endif %}
+                {% if job.benefits %}
+                <p class="white-text mb-0"><strong>Benefits:</strong> {{ job.benefits }}</p>
+                {% endif %}
+                {% if job.data_verification %}
+                <p class="white-text mb-0"><strong>Data Verification:</strong> {{ job.data_verification }}</p>
+                {% endif %}
+                {% if job.required_skills %}
+                <p class="white-text mb-0"><strong>Required Skills:</strong> {{ job.required_skills }}</p>
+                {% endif %}
                 <br>
                 {% if current_user == job.author %}
                 <a class="btn btn-primary" href="{{ url_for('jobs.updatejob', job_id=job.id) }}">შეცვლა</a>

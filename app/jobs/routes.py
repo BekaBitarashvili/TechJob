@@ -12,7 +12,10 @@ jobs = Blueprint('jobs', __name__)
 def new_job():
     form = JobForm()
     if form.validate_on_submit():
-        job = Job(title=form.title.data, description=form.description.data, author=current_user)
+        job = Job(title=form.title.data, description=form.description.data, salary=form.salary.data,
+                  location=form.location.data, benefits=form.benefits.data,
+                  data_verification=form.data_verification.data, required_skills=form.required_skills.data,
+                  author=current_user)
         db.session.add(job)
         db.session.commit()
         flash('ვაკანსია წარმატებით შეიქმნა!', 'success')
@@ -36,12 +39,22 @@ def updatejob(job_id):
     if form.validate_on_submit():
         job.title = form.title.data
         job.description = form.description.data
+        job.salary = form.salary.data
+        job.location = form.location.data
+        job.benefits = form.benefits.data
+        job.data_verification = form.data_verification.data
+        job.required_skills = form.required_skills.data
         db.session.commit()
         flash('ვაკანსია წარმატებით განახლდა!', 'success')
         return redirect(url_for('jobs.job', job_id=job.id))
     elif request.method == 'GET':
         form.title.data = job.title
         form.description.data = job.description
+        form.salary.data = job.salary
+        form.location.data = job.location
+        form.benefits.data = job.benefits
+        form.data_verification.data = job.data_verification
+        form.required_skills.data = job.required_skills
     return render_template('create_job.html', title='Update Job', legend='ვაკანსიის განახლება', form=form)
 
 
