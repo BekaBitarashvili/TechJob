@@ -12,19 +12,19 @@
                 <p class="white-text mb-0"><strong>აღწერა:</strong> {{ job.description }}</p>
 
                 {% if job.salary %}
-                <p class="white-text mb-0"><strong>Salary:</strong> {{ job.salary }}</p>
+                <p class="white-text mb-0"><strong>ხელფასი:</strong> {{ job.salary }}</p>
                 {% endif %}
                 {% if job.location %}
-                <p class="white-text mb-0"><strong>Location:</strong> {{ job.location }}</p>
+                <p class="white-text mb-0"><strong>მდებარეობა:</strong> {{ job.location }}</p>
                 {% endif %}
                 {% if job.benefits %}
-                <p class="white-text mb-0"><strong>Benefits:</strong> {{ job.benefits }}</p>
+                <p class="white-text mb-0"><strong>ბენეფიტები:</strong> {{ job.benefits }}</p>
                 {% endif %}
                 {% if job.data_verification %}
-                <p class="white-text mb-0"><strong>Data Verification:</strong> {{ job.data_verification }}</p>
+                <p class="white-text mb-0"><strong>მონაცემების გადამოწმებაზე თანხმობა:</strong> {{ job.data_verification }}</p>
                 {% endif %}
                 {% if job.required_skills %}
-                <p class="white-text mb-0"><strong>Required Skills:</strong> {{ job.required_skills }}</p>
+                <p class="white-text mb-0"><strong>აუცილებელი მოთხოვნები:</strong> {{ job.required_skills }}</p>
                 {% endif %}
                 <br>
                 {% if current_user == job.author %}
