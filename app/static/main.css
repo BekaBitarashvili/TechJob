@@ -1,7 +1,7 @@
 /* For Navbar */
 
 .navbar-dark {
-  background-color: #510093;
+  background-color: #10282a;
 }
 
 .navbar-dark .navbar-brand,
@@ -14,7 +14,7 @@
   color: #ccc;
 }
 body {
-  background-color: #510093;
+  background-color: #183D3D;
 }
 .white-text {
   color: #fff;
@@ -58,7 +58,7 @@ body {
     right: 10px;
 }
 .more-button {
-        background-color: #510093;
+        background-color: #5C8374;
         color: white;
         padding: 6px 12px;
         border-radius: 5px;
@@ -71,5 +71,5 @@ body {
 }
 
 .more-title {
-    background-color: #510093;
+    background-color: #5C8374;
 }
