@@ -15,3 +15,10 @@ def home():
 @main.route('/about')
 def about():
     return render_template('about.html')
+
+
+@main.route('/search')
+def search():
+    query = request.args.get('query')
+    results = Job.query.filter(Job.title.ilike(f'%{query}%')).all()
+    return render_template('search.html', results=results)

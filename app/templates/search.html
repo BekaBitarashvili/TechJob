@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="white-text">ძიების შედეგები:</h1>
+        <br>
+        <br>
+        <div class="row">
+            {% for job in results %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-header text-white more-title">
+                            <h5 class="mb-0">{{ job.title }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img class="img-fluid rounded-circle"
+                                         src="{{ url_for('static', filename='images/' + job.author.image_file) }}"
+                                         alt="Author Image">
+                                </div>
+                                <div class="col-md-10">
+                                    <p class="mb-1"><strong>ავტორი:</strong> {{ job.author.username }}</p>
+                                    <p class="mb-1"><strong>თარიღი:</strong> {{ job.date_posted.strftime('%Y-%m-%d') }}</p>
+                                    <p class="mb-0"><strong>აღწერა:</strong> {{ job.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ url_for('jobs.job', job_id=job.id) }}" class="btn more-button">ვრცლად</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
