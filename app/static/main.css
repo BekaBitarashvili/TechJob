@@ -73,3 +73,13 @@ body {
 .more-title {
     background-color: #5C8374;
 }
+/*Search Box Design*/
+.rounded-pill {
+    border-radius: 50px !important;
+}
+.fa-search {
+    color: #555;
+}
+.input-group {
+    margin-left: 400px;
+}
