@@ -3,7 +3,7 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-9">
-<!--            <h1 class="mb-4 white-text small">ვაკანსიები</h1>-->
+            <!--            <h1 class="mb-4 white-text small">ვაკანსიები</h1>-->
             {% for job in jobs.items %}
             <div class="card mb-4">
                 <div class="card-header text-white more-title">
@@ -59,14 +59,13 @@
             </div>
             <div class="card mb-3">
                 <div class="card-header">
-                    სიახლეები
+                    ვაკანსიების სტატისტიკა
                 </div>
                 <div class="card-body">
-                    <p>სიახლე 1</p>
-                    <p>სიახლე 2</p>
-                    <p>სიახლე 3</p>
+                    <canvas id="sampleChart" width="400" height="400"></canvas>
                 </div>
             </div>
+
             <div class="card">
                 <div class="card-header">
                     სპონსორები
